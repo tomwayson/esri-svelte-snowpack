@@ -1,6 +1,8 @@
-# New Project
+# Esri Svelte Snowpack Example
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This is an example of how to use the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) in a [Svelte](https://svelte.dev/) application that has been bootstrapped with [Create Snowpack App (CSA)](https://github.com/snowpackjs/snowpack/tree/main/create-snowpack-app/cli).
+
+The App code was copied from [esri-svelte-example](https://github.com/gavinr/esri-svelte-example).
 
 ## Available Scripts
 

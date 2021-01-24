@@ -1,69 +1,65 @@
 <script>
-  import {onMount} from 'svelte';
-  let count = 0;
-  onMount(() => {
-    const interval = setInterval(() => count++, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  import { loadModules } from "esri-loader";
+  export let title = 'Esri Svelte Snowpack Example';
+  export let centerText;
+  // Function that gets called when the element is created.
+  // https://svelte.dev/tutorial/actions
+  // https://svelte.school/tutorials/introduction-to-actions
+  const createMap = async (domNode) => {
+    // Use esri-loader to load the EsriMap and MapView modules
+    // // https://github.com/Esri/esri-loader#usage
+    const esriLoaderOptions = { css: true };
+    const [EsriMap, MapView] = await loadModules(
+      ["esri/Map", "esri/views/MapView"],
+      esriLoaderOptions
+    );
+    // Create the map
+    const map = new EsriMap({
+      basemap: "streets"
+    });
+    // Create the mapView from the map
+    const view = new MapView({
+      container: domNode,
+      map: map,
+      zoom: 8,
+      center: [-90, 38] // longitude, latitude
+    });
+    // Use the watch functionality of the JavaScript API (view.watch) to call a
+    // function every time the extent changes. Every time it does, update the
+    // "centerText" variable - Svelte takes care of updating the UI based
+    // on this variable assignment
+    // (Reactivity!) https://svelte.dev/tutorial/reactive-assignments
+    view.watch("center", center => {
+      const { latitude, longitude } = center;
+      centerText = `Lat: ${latitude.toFixed(2)} | Lon: ${longitude.toFixed(2)}`;
+    });
+  };
 </script>
 
 <style>
-  :global(body) {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+  h1 {
+    color: purple;
   }
-  .App {
-    text-align: center;
-  }
-  .App code {
-    background: #0002;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-  .App p {
-    margin: 0.4rem;
-  }
-
-  .App-header {
-    background-color: #f9f6f6;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-  }
-  .App-link {
-    color: #ff3e00;
-  }
-  .App-logo {
-    height: 36vmin;
-    pointer-events: none;
-    margin-bottom: 3rem;
-    animation: App-logo-pulse infinite 1.6s ease-in-out alternate;
-  }
-  @keyframes App-logo-pulse {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.06);
-    }
+  .view {
+    height: 400px;
+    width: 400px;
   }
 </style>
 
-<div class="App">
-  <header class="App-header">
-    <img src="/logo.svg" class="App-logo" alt="logo" />
-    <p>Edit <code>src/App.svelte</code> and save to reload.</p>
-    <p>Page has been open for <code>{count}</code> seconds.</p>
-    <p>
-      <a class="App-link" href="https://svelte.dev" target="_blank" rel="noopener noreferrer">
-        Learn Svelte
-      </a>
-    </p>
-  </header>
-</div>
+<h1>{title}</h1>
+<p>
+  An example
+  <a href="https://svelte.dev/">Svelte</a>
+  application that shows how to use <a href="https://github.com/Esri/esri-loader">esri-loader</a> to load a map. Check out the
+  <a href="https://github.com/tomwayson/esri-svelte-snowpack">code</a>
+  for more info!
+</p>
+
+<!-- use:createMap calls the "createMap" function (defined above) when the  -->
+<!-- element is created. -->
+<!-- See the "createMap" function def above for more info. -->
+<div class="view" use:createMap />
+
+{#if centerText}
+  <p>{centerText}</p>
+{/if}

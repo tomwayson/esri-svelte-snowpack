@@ -5,6 +5,7 @@
     "test": "web-test-runner \"src/**/*.test.js\""
   },
   "dependencies": {
+    "esri-loader": "^3.0.0",
     "svelte": "^3.24.0"
   },
   "devDependencies": {

@@ -1010,6 +1010,11 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+esri-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/esri-loader/-/esri-loader-3.0.0.tgz#4ff9008cf3223aa284507ec19d575a8cee7a6e6e"
+  integrity sha512-JvNL1agqzJz13uMaAfjktO66iIpJLYjmHabS73tEc910ZCAXMl5i7mWXQxbCdYCIWwRtL3SEhXBXRxSFfX6MBQ==
+
 estree-walker@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.6.1.tgz#53049143f40c6eb918b23671d1fe3219f3a1b362"
